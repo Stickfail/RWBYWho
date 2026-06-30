@@ -69,6 +69,7 @@
     </div>
 
     <p id="remaining" class="center"></p>
+    <button onclick="alert(randomCharacter())" style="position:absolute; right:10px;">Random Character</button>
 
     <script>
         const images = [
@@ -146,6 +147,12 @@
             for(const child of gamespace.children){
                 child.classList.remove("selected")
             }
+        }
+
+        function randomCharacter(){
+            let rand = Math.floor(Math.random()*images.length)
+            let name = images[rand].slice(11)
+            return(name.substring(0,name.length-4))
         }
 
         function populateBoard() {
