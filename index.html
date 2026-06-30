@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .center {
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .character {
+            width: 100px;
+            margin: 10px;
+
+        }
+
+        body {
+            background-image: url(background.jpg);
+            background-repeat: no-repeat;
+            background-size: auto;
+
+        }
+
+        img {
+            transition:
+                transform 0.2s ease,
+                filter 0.2s ease,
+                opacity 0.2s ease;
+            cursor: pointer;
+
+        }
+
+        img.selected {
+            transform: scale(0.94);
+            filter: brightness(40%);
+            opacity: 1;
+        }
+
+        p {
+            color: white;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="reset()">Reset</button>
+    <img src="title.png" width="300px" class="center noselect">
+
+    <div id="gamespace" class="center">
+
+    </div>
+
+    <p id="remaining" class="center"></p>
+
+    <script>
+        const images = [
+            "Characters/Adam.png",
+            "Characters/Ambrosius.png",
+            "Characters/Blake.png",
+            "Characters/Cardin.png",
+            "Characters/Cinder.png",
+            "Characters/Clover.png",
+            "Characters/Coco.png",
+            "Characters/Cordovin.png",
+            "Characters/Elm.png",
+            "Characters/Emerald.png",
+            "Characters/Fiona.png",
+            "Characters/Flynt.png",
+            "Characters/Fria.png",
+            "Characters/Glynda.png",
+            "Characters/Harriet.png",
+            "Characters/Hazel.png",
+            "Characters/Ilia.png",
+            "Characters/Ironwood.png",
+            "Characters/Jacques.png",
+            "Characters/Jaune.png",
+            "Characters/Jinn.png",
+            "Characters/Kali.png",
+            "Characters/Klein.png",
+            "Characters/Lionheart.png",
+            "Characters/Maria.png",
+            "Characters/Marrow.png",
+            "Characters/Mercury.png",
+            "Characters/Neo.png",
+            "Characters/Neon.png",
+            "Characters/Neptune.png",
+            "Characters/Nora.png",
+            "Characters/Oobleck.png",
+            "Characters/Oscar.png",
+            "Characters/Ozpen.png",
+            "Characters/Penny.png",
+            "Characters/Pietro.png",
+            "Characters/Pyrrha.png",
+            "Characters/Qrow.png",
+            "Characters/Raven.png",
+            "Characters/Ren.png",
+            "Characters/Robyn.png",
+            "Characters/Roman.png",
+            "Characters/Ruby.png",
+            "Characters/Salem.png",
+            "Characters/Sun.png",
+            "Characters/Tai.png",
+            "Characters/Tyrian.png",
+            "Characters/Velvet.png",
+            "Characters/Vernal.png",
+            "Characters/Vine.png",
+            "Characters/Watts.png",
+            "Characters/Weiss.png",
+            "Characters/Whitley.png",
+            "Characters/Winter.png",
+            "Characters/Yang.png",
+            "Characters/Zwei.png",
+        ];
+
+        const gamespace = document.getElementById("gamespace")
+        const remaining = document.getElementById("remaining")
+
+        function countRemaining() {
+            let total = images.length
+
+            let count = document.querySelectorAll("img.selected").length;
+
+            remaining.innerText = `${total - count} of ${total} remaining`
+        }
+        countRemaining()
+
+        function reset(){
+            for(const child of gamespace.children){
+                child.classList.remove("selected")
+            }
+        }
+
+        function populateBoard() {
+            images.forEach(char => {
+                const img = new Image()
+                img.src = char
+                img.classList.add("character", "noselect")
+                img.setAttribute("draggable", false)
+
+                img.addEventListener("click", () => {
+                    img.classList.toggle("selected");
+
+                    countRemaining()
+                });
+
+                gamespace.appendChild(img)
+            })
+        }
+
+        populateBoard()
+    </script>
+</body>
+
+</html>
