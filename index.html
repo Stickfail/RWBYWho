@@ -18,10 +18,9 @@
         }
 
         body {
-            background-image: url(background.jpg);
+            background-image:url(background.jpg);
             background-repeat: no-repeat;
-            background-size: 100%;
-
+            background-size: auto;
         }
 
         img {
@@ -56,16 +55,17 @@
 </head>
 
 <body>
-    <button onclick="reset()">Reset</button>
-    <img src="title.png" width="300px" class="center noselect">
+        <button onclick="reset()">Reset</button>
+        <img src="title.png" width="300px" class="center noselect">
 
-    <div id="gamespace" class="center">
+        <div id="gamespace" class="center">
 
-    </div>
+        </div>
 
-    <p id="remaining" class="center"></p>
-    <button onclick="alert(randomCharacter())" style="position:absolute; right:10px;">Random Character</button>
-
+        <p id="remaining" class="center"></p>
+        <button onclick="alert(randomCharacter())" style="position:absolute; right:10px;">Random Character</button>
+        <br>
+    
     <script>
         const images = [
             "Characters/Adam.png",
@@ -138,17 +138,17 @@
         }
         countRemaining()
 
-        function reset(){
-            for(const child of gamespace.children){
+        function reset() {
+            for (const child of gamespace.children) {
                 child.classList.remove("selected")
             }
             countRemaining()
         }
 
-        function randomCharacter(){
-            let rand = Math.floor(Math.random()*images.length)
+        function randomCharacter() {
+            let rand = Math.floor(Math.random() * images.length)
             let name = images[rand].slice(11)
-            return(name.substring(0,name.length-4))
+            return (name.substring(0, name.length - 4))
         }
 
         function populateBoard() {
